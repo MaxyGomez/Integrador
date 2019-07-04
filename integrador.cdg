@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="integrador">
+  <ClassDiagramComponents>
+    <Class name="Persona" package="" visibility="public" xPosition="360.0" yPosition="54.0">
+      <Fields>
+        <Field name="dni" type="String" visibility="private"/>
+        <Field name="nombres" type="String" visibility="private"/>
+        <Field name="apellidos" type="String" visibility="private"/>
+        <Field name="fechaNacimiento" type="Date" visibility="private"/>
+        <Field name="telefono" type="String" visibility="private"/>
+        <Field name="mail" type="String" visibility="private"/>
+        <Field name="domicilio" type="Domicilio" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Domicilio" package="" visibility="public" xPosition="29.0" yPosition="54.0">
+      <Fields>
+        <Field name="calle" type="String" visibility="private"/>
+        <Field name="numero" type="String" visibility="private"/>
+        <Field name="localidad" type="String" visibility="private"/>
+        <Field name="provincia" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Paciente" package="" visibility="public" xPosition="360.0" yPosition="635.0">
+      <Fields>
+        <Field name="historial" type="String" visibility="private"/>
+        <Field name="historiaClinica" type="List&lt;Historia&gt;" visibility="private"/>
+        <Field name="listaCitas" type="List&lt;Cita&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Medico" package="" visibility="public" xPosition="46.0" yPosition="329.0">
+      <Fields>
+        <Field name="numeroMatricula" type="String" visibility="private"/>
+        <Field name="especialidad" type="String" visibility="private"/>
+        <Field name="turno" type="List&lt;Turno&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Administrativo" package="" visibility="public" xPosition="647.0" yPosition="156.0">
+      <Fields>
+        <Field name="recordatorio" type="List&lt;Cita&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Cita" package="" visibility="public" xPosition="757.0" yPosition="471.0">
+      <Fields>
+        <Field name="paciente" type="Paciente" visibility="private"/>
+        <Field name="medico" type="Medico" visibility="private"/>
+        <Field name="horaComienzo" type="Date" visibility="private"/>
+        <Field name="horaTermina" type="Date" visibility="private"/>
+        <Field name="disponible" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Historia" package="" visibility="public" xPosition="83.0" yPosition="635.0">
+      <Fields>
+        <Field name="paciente" type="Paciente" visibility="private"/>
+        <Field name="fecha" type="Date" visibility="private"/>
+        <Field name="descripcion" type="String" visibility="private"/>
+        <Field name="medico" type="Medico" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Turno" package="" visibility="public" xPosition="437.0" yPosition="312.0">
+      <Fields>
+        <Field name="medico" type="Medico" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="citas" type="List&lt;Cita&gt;" visibility="private"/>
+        <Field name="fecha" type="Date" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation name="" source="Persona" target="Domicilio" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="citas" source="Turno" target="Cita" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="turnos" source="Medico" target="Turno" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <UseRelation name="" source="Turno" target="Cita" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Administrativo" target="Persona"/>
+    <HasRelation name="domicilio" source="Persona" target="Domicilio" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="historiaClinica" source="Paciente" target="Historia" type="Aggregation" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="medico" source="Cita" target="Medico" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="medico" source="Historia" target="Medico" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Historia" target="Medico" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Medico" target="Turno" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="listaCitas" source="Paciente" target="Cita" type="Aggregation" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <IsRelation name="is" source="Paciente" target="Persona"/>
+    <UseRelation name="" source="Paciente" target="Historia" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Paciente" target="Cita" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Historia" target="Paciente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="paciente" source="Historia" target="Paciente" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Medico" target="Persona"/>
+    <HasRelation name="paciente" source="Cita" target="Paciente" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
